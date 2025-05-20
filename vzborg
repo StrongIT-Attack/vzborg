@@ -244,7 +244,7 @@ vzborg_backup() {
         say "<- Finished backup of ${vm_type} ${VM_ID} (${vm_hostname})." |& tee -a ${detail_file}
 
         printf "$line_format" $vm_type $VM_ID $(($backup_es / 3600)) $(($backup_es % 3600 / 60)) $(($backup_es % 60)) $backup_status $(($purge_es / 3600)) $(($purge_es % 3600 / 60)) $(($purge_es % 60)) $purge_status $vm_hostname >>${summary_file}
-	if [[ $backup_status == 'failed' ]}; then
+	if [[ $backup_status == 'failed' ]]; then
 	    backup_failures=$(($backup_failures+1))
 	    backup_failures+=1
 	fi
