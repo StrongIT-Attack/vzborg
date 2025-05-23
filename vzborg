@@ -249,6 +249,10 @@ vzborg_backup() {
 	    backup_failures+=1
 	fi
     done
+    if [[ ${purge_on_backup} = true ]]; then
+	say "Launching borg compact command to free up storage space."
+	borg compact ${borg_extra} -v ${vzborg_repo}
+    fi
     if [[ $backup_failures -gt 0 ]]; then
 	say "Backup task completed with $backup_failures amount of errors. Exiting with exit code 2."
 	exit 2
